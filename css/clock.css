@@ -1,0 +1,63 @@
+.clockFace {
+    width: 350px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 30px #000000 solid;
+    position: relative;
+    height: 350px;
+    min-width: 350px;
+    box-shadow: 8px 8px 8px #3c3c3c;
+}
+
+.clockFace .hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
+    border-radius: 40px;
+}
+
+.clockFace .hoursHand {
+    height: 100px;
+    width: 14px;
+    background-color: #000000;
+    z-index: 3;
+}
+
+.clockFace .minuteHand {
+    height: 135px;
+    width: 10px;
+    background-color: #000000;
+    z-index: 4;
+}
+
+.clockFace .secondHand {
+    height: 155px;
+    width: 5px;
+    background-color: #ff2ddb;
+    z-index: 5;
+}
+
+.clockFace .alarmHand {
+    height: 155px;
+    width: 10px;
+    background-color: #31ff00;
+    z-index: 2;
+}
+
+.clockFace .middle {
+    background-color: #ff2ddb;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 6;
+}
+

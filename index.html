@@ -1,0 +1,802 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/clock.css">
+        <link rel="stylesheet" href="css/prism.css">
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Basic Alarm Clock</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#home"  role="tab">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#info"  role="tab">Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#planning"  role="tab">Planning</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#html"  role="tab">HTML/JS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#php"  role="tab">PHP</a>
+            </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane active" id="home" role="tabpanel">
+                <div class="row" style="margin-top: 25px">
+                    <div class="col-lg-12">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                This clock will play a YouTube video at the selected time. Times must be entered in military format: (23:01). If the time is incorrect the
+                                alarm time will be surrounded with a red border. To add new alarm, click the "Add Alarm" button. The clock currently stores your alarm data in a cookie,
+                                but is coded to support an REST service that can use JSON. The Alarm hands are <span style="color: lime; text-decoration: blink"> bright green</span>.
+                            </div>
+                        </div><br/><br/>
+                    </div>
+                </div>
+                <div class="row" style="height: 400px">
+                    <div class="col-lg-5 offset-1">
+                        <div class="clockFace" id="clockFace">
+                            <div class="secondHand hand"></div>
+                            <div class="minuteHand hand"></div>
+                            <div class="hoursHand hand"></div>
+                            <div class="middle"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group" id="alarmsDiv">
+
+                        </div>
+                        <a type="submit" class="btn btn-primary btn-block " onclick="addAlarm()">ADD ALARM</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="info" role="tabpanel">
+                <div class="row" style="margin-top: 25px">
+                    <div class="col-lg-6">
+                        <div class="list-group">
+                            <div href="#" class="list-group-item  list-group-item-action active disabled text-uppercase">
+                                Things I used to make this clock:
+                            </div>
+                            <a href="https://github.com/js-cookie/js-cookie" class="list-group-item list-group-item-action">
+                                js-cookie
+                            </a>
+                            <a href="https://v4-alpha.getbootstrap.com/" class="list-group-item list-group-item-action">
+                                Bootstrap 4 - Lux
+                            </a>
+                            <a href="https://phalconphp.com/en/" class="list-group-item list-group-item-action">
+                                Phalcon MVC
+                            </a>
+                            <a href="https://jquery.com/" class="list-group-item list-group-item-action">
+                                JQuery
+                            </a>
+                            <a href="https://www.w3.org/TR/css-2017/" class="list-group-item list-group-item-action">
+                                CSS3
+                            </a>
+                            <a href="https://www.json.org/" class="list-group-item list-group-item-action">
+                                JSON
+                            </a>
+                            <a href="http://www.initializr.com/" class="list-group-item list-group-item-action">
+                                initializr
+                            </a>
+                            <a href="http://prismjs.com" class="list-group-item list-group-item-action">
+                                Prism.js
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card card-primary">
+                            <div class="card-body">
+                                <p>
+                                    Time was a consideration when planning this project. To make something decent and usable
+                                    I used Bootstrap 4 and JQuery, because they're easy to set up and I have experience with both.
+                                </p>
+                                <p>
+                                    I was working with cookies, so I included the js-cookies API for cookie management. It's lightweight
+                                    and supports JSON very well. Going to use JavaScript to handle the actual time/comparison, then I don't have to worry about
+                                    time zones because it use the local machine.
+                                </p>
+                                <p>
+                                    Due to the mixed nature + time constraint, JSON makes the most sense-it's easy to use and many things
+                                    can digest it/read it without much work. Going to give an example RESTful service written in Phalcon MVC.
+                                </p>
+                                <p>
+                                    Initializer was used to create the boilerplate for the site, for rapid production purposes. CSS3 for styling,
+                                    using a free boostrap theme to make it pretty.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="planning" role="tabpanel">
+                <div class="row" style="margin-top: 25px">
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-info">
+                            <div class="card-header">
+                                The Project:
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>
+                                        An alarm clock
+                                    </li>
+                                    <li>
+                                        Built in two horus
+                                    </li>
+                                    <li>
+                                        Use web technologies
+                                    </li>
+                                    <li>
+                                        User Story: Enter a time. An alarm will sound.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-success">
+                            <div class="card-header">
+                                The Knowns:
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>
+                                        Need to display development skills
+                                    </li>
+                                    <li>
+                                        An alarm needs to sound at a time selected by the user
+                                    </li>
+                                    <li>
+                                        Security and fancy graphics are not the concern
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-warning">
+                            <div class="card-header">
+                                The Concerns:
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>
+                                        Time. Built in two hours.
+                                    </li>
+                                    <li>
+                                        The project doesn't call for a full MVC/session data on a server; the app doesn't care about the state.
+                                    </li>
+                                    <li>
+                                        Providing support for it anyway.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card text-black bg-light">
+                            <div class="card-header">
+                                Planning User Stories:
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Current time is displayed using an analog style clock, shows off some fancy CSS3 skills.</li>
+                                    <li>User can add multiple alarms, clicks a button to do so</li>
+                                    <li>User can remove an alarm</li>
+                                    <li>User can edit an alarm using a text box</li>
+                                    <li>Analog clock face is updated to reflect alarms</li>
+                                    <li>Maybe a fancy script to allow the user to select the YouTube video they'd like to use; depends on time</li>
+                                    <li>Need a space to display code/meta information, link to included libraries/whatever</li>
+                                    <li>Going to provide the Phalcon REST code for the project, given that it needs it's own environment and installation is its own consideration.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card text-black bg-light">
+                            <div class="card-header">
+                                Pseudo Code (All the action really happens in JavaScript):
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>
+                                        Page load: <br/>
+                                        -- Get current alarms (From cookie/REST), load into "alarms" object<br/>
+                                        -- For each alarm, draw text box and clock hands<br/>
+                                        -- Kick off loop every 50 milliseconds to check time/update clock hands<br/><br/>
+                                    </li>
+                                    <li>
+                                        "Add new": <br/>
+                                        -- Add new alarm to alarms, using current time as default. (It will be passed, so it will rpevent it from going off immediately)<br/>
+                                        -- For each alarm, draw text box and clock hands, save to Cookie/REST<br/><br/>
+                                    </li>
+                                    <li>
+                                        "Remove": <br/>
+                                        -- Will remove alarm from Object in memory, rebuild Alarms object with new numbering and then save new Alarms to REST/Cookie<br/>
+                                        -- For each alarm, draw text box and clock hands<br/><br/>
+                                    </li>
+                                    <li>
+                                        "Edit": <br/>
+                                        -- Will remove alarm from Object in memory, rebuild Alarms object with new numbering and then save new Alarms to REST/Cookie<br/>
+                                        -- For each alarm, draw text box and clock hands<br/><br/>
+                                    </li>
+                                    <li>
+                                        Clock hands: <br/>
+                                        -- Get date, using CSS3 rotation for nice positioning of hands.<br/>
+                                        -- Will be updated every function call<br/>
+                                        -- Circle has 360 degrees, clock has 12 hour point. So, hours = 360/12 degrees, minutes 360/60, etc.<br/><br/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card text-white bg-dark">
+                            <div class="card-header">
+                                REST API:
+                            </div>
+                            <div class="card-body">
+
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                VERB
+                                            </th>
+                                            <th>
+                                                URI
+                                            </th>
+                                            <th>
+                                                DESCRIPTION
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                GET
+                                            </td>
+                                            <td>
+                                                Alarms/userID
+                                            </td>
+                                            <td>
+                                                Returns alarms specified by the userID
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                PUT
+                                            </td>
+                                            <td>
+                                                Alarms/userID
+                                            </td>
+                                            <td>
+                                                Edits alarms specified by the userID + message body
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                DELETE
+                                            </td>
+                                            <td>
+                                                Alarms/userID/alarmID
+                                            </td>
+                                            <td>
+                                                Deletes alarms specified by the userID + alarm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                POST
+                                            </td>
+                                            <td>
+                                                Alarms/userID
+                                            </td>
+                                            <td>
+                                                Adds a new Alarm(userID) with data provided in the message body
+                                            </td>
+                                        </tr>
+                                        <tr class="text-uppercase">
+                                            <th>
+                                                Function
+                                            </th>
+                                            <th colspan="2">
+                                                Description
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                verifyUser(id)
+                                            </td>
+                                            <td colspan="2">
+                                                Does the User exist? Eventually add more validation rules for what constitutes a valid user should that change. Return proper codes
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                verifyAlarm(id)
+                                            </td>
+                                            <td colspan="2">
+                                                Ensure proper formatting on input. Not getting to fancy here...time.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="html" role="tabpanel">
+                <div class="row" style="margin-top: 25px">
+                    <div class="col-lg-12">
+                        <div class="card text-white bg-info">
+                            <div class="card-header">
+                                HTML
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>
+                                        Need a left column to display the clock; going to not make it super responsive, have to consider redraws for Bootstraps, the bugs
+                                        that would introduce and my time constraint.
+                                    </li>
+                                    <li>
+                                        Need an empty div on the right hand column to be filled in with JavaScript.
+                                    </li>
+                                    <li>
+                                        Slap it all in a tab and style it.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card text-black bg-light">
+                            <div class="card-header">
+                                The JavaScript:
+                            </div>
+                            <div class="card-body">
+                               <pre data-src="js/clock.js" class="language-javascript">
+                                    <code class="language-javascript">
+
+// Get the alarms, kick off the main clock loop, where everything happens
+$(document).ready(function() {
+    if (Cookies.getJSON('alarms')) {
+        alarms = Cookies.getJSON('alarms');
+        // This is where your call to the REST goes
+
+        updateAlarmsDiv();
+        updateClockAlarmArms();
+    }
+    else{
+        alarms = {};
+    }
+
+    // Use the "presentTime()" function every 50 ms to loop draw the page, and check for an alarm
+    setInterval(function(){
+        presentTime();
+    }, 50);
+
+});
+
+// This is the function that does the heavy lifting for alarms, and updating the clock hands
+function presentTime() {
+    var d = new Date();
+    // Get them seconds/minutes
+    var s = d.getSeconds() + (d.getMilliseconds()/1000);
+    var m = d.getMinutes();
+
+    // Hours are a bit more complex. This isn't required, but if time allows I'd like to support an AM/PM thing
+    var h = hour12(d);
+    var h24 = d.getHours();
+
+    // Update the clock face
+    $(".secondHand").css("transform", "translate(-50%, -100%) rotate(" + s*6 + "deg)");
+    $(".minuteHand").css("transform", "translate(-50%, -100%) rotate(" + m*6 + "deg)");
+    $(".hoursHand").css("transform", "translate(-50%, -100%) rotate(" + (h*30 + m*0.5) + "deg)");
+
+    // This is where we check to see if the current time is an alarm.
+    for(a in alarms){
+        alarmHours       = alarms[a].split(':')[0];
+        alarmMinutes     = alarms[a].split(':')[1];
+
+        //console.log(s);
+        if(m == alarmMinutes && h24 == alarmHours && s < .05){
+            // This is where the alarm happens
+            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            console.log("ALARM");
+        }
+    }
+}
+
+// To handle 24 hour functions
+function hour12(date) {
+    var hour = date.getHours();
+
+    if(hour >= 12) {
+        hour = hour-12;
+    }
+
+    if(hour === 0) {
+        h = 12;
+    }
+
+    return hour;
+}
+
+// Calls the appropriate updates; Saves the data to the cookie, updates clockface and text boxes
+function alarmsUpdate(){
+    Cookies.set('alarms',alarms); // Only if using cookies not REST
+    updateAlarmsDiv();
+    updateClockAlarmArms();
+}
+
+function editAlarm(alarmID,textBox){
+    // Make sure it's a valid input, using REGEX (Thank you PERL)
+    var valid = /^([01]\d|2[0-3]):?([0-5]\d)$/.test(textBox.value);
+    if(valid) {
+        alarms[alarmID] = textBox.value;
+        // This is where your call to the REST goes
+        alarmsUpdate();
+    }
+    else{
+        // Let the user know, should be louder and preserve the value but TIME
+        textBox.style.borderColor = "red";
+    }
+}
+
+// Adds a new alarm, using the current time as the default value
+function addAlarm(){
+    var d = new Date();
+
+    // Make sure things are formatted correctly.
+    var m = d.getMinutes();
+    m = (m < 10) ? ("0" + m) : m;
+
+    var h24 = d.getHours();
+    h24 = (h24 < 10) ? ("0" + h24) : h24;
+    var alarm = h24 + ':' + m;
+
+    var alarmCount = Object.keys(alarms).length;
+    // Added to the end of the chain
+    alarms[alarmCount + 1] = alarm;
+
+    // This is where your call to the REST goes
+    alarmsUpdate();
+}
+
+// Remove the alarm
+function removeAlarm(id) {
+    // This is where your call to the REST goes
+    delete alarms[id];
+
+    var y = 1;
+    var alarms2 = {};
+    for(x in alarms){
+        alarms2[y] = alarms[x];
+        y++;
+    }
+    alarms = alarms2;
+    alarmsUpdate();
+}
+
+
+// Display alarms in Text Boxes
+function updateAlarmsDiv(){
+    $('#alarmsDiv').html('');
+    for(x in alarms){
+        addTextBox(alarms[x],x);
+    }
+}
+
+function addTextBox(alarmBox, id){
+    var newTextBoxDiv = $(document.createElement('div'))
+        .attr("id", 'TextBoxDiv');
+
+    newTextBoxDiv.after().html('label for="alarmTime">Alarm # : '+id+'/label>a href="" onClick="removeAlarm(\''+ id + '\')" style="float: right">Remove /a>' +
+        'input type="text" name="textbox' +
+        '" id="textbox' +  '" class="form-control" aria-describedby="alarmTime" value="'+ alarmBox + '" ' +
+        'onblur="editAlarm(\''+ id + '\', this)"/ >br />');
+
+    newTextBoxDiv.appendTo("#alarmsDiv");
+}
+
+
+//Updates arms
+function updateClockAlarmArms(){
+    $('div.alarmHand').remove();
+    for(x in alarms){
+        var rotationHours       = alarms[x].split(':')[0] * 30;
+        var rotationMinutes     = alarms[x].split(':')[1] * .5;
+        var totalRotation       = rotationHours + rotationMinutes;
+
+        $('#clockFace').append("div class=\"alarmHand hand\" style=\"transform: translate(-50%, -100%) rotate("+ totalRotation +"deg);\">/div>");
+}
+}
+
+// AJAX Rest Example(s) for JSON alarms by user
+function exampleRESTCallForJSON(){
+    $.ajax({
+        type: "GET",                            // Get/Post/Put/Delete
+        url: 'http://{serverNAME}/userID/',     // URL varies by thing you're doing
+        data: "",                               // This is where you'd you'd put the JSON alarms
+        dataType: 'application/json',
+        success: function(data) {
+            alarms = data;                      // Return the data if it's appropriate
+        },
+        error: function(e) {
+            alert(e);
+        }
+    });
+}
+
+
+                            </code>
+                               </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+            </div>
+            <div class="tab-pane" id="php" role="tabpanel">
+                <br /><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card text-black bg-light">
+                            <div class="card-header">
+                                A very basic REST API written in Phalcon:
+                            </div>
+                            <div class="card-body">
+                               <pre data-src="js/clock.js" class="language-php">
+                                    <code class="language-php">
+$app->get(
+    "/alarms/{userID}",
+    function () use ($app) {
+        $phql = "SELECT * FROM alarms WHERE userID like :userID:";
+
+        $alarms = $app->modelsManager->executeQuery($phql);
+
+        $data = [];
+
+        foreach ($alarms as $alarm) {
+            $data[] = [
+                "id"   => $alarm->number,
+                "time" => $alarm->time,
+            ];
+        }
+
+        echo json_encode($data);
+    }
+);
+
+$app->post(
+    "/alarms/{userID}",
+    function () use ($app) {
+        // Get the body
+        $alarm = $app->request->getJsonRawBody();
+
+        // Write the query
+        $phql = "INSERT INTO alarms (userID, alarmID, time) VALUES (:userID:, :alarmID:, :time:)";
+
+        $status = $app->modelsManager->executeQuery(
+            $phql,
+            [
+                "userID"    => $alarm->userID,
+                "type"      => $alarm->alarmID,
+                "year"      => $alarm->time,
+            ]
+        );
+
+        $response = new Response();
+
+        // Make sure everything worked
+        if ($status->success() === true) {
+            $response->setStatusCode(201, "Created");
+
+            $alarm->id = $status->getModel()->id;
+
+            $response->setJsonContent(
+                [
+                    "status" => "OK",
+                    "data"   => $alarm,
+                ]
+            );
+        } else {
+            // Change the HTTP status
+            $response->setStatusCode(409, "Conflict");
+
+            // Send errors to the client
+            $errors = [];
+
+            foreach ($status->getMessages() as $message) {
+                $errors[] = $message->getMessage();
+            }
+
+            $response->setJsonContent(
+                [
+                    "status"   => "ERROR",
+                    "messages" => $errors,
+                ]
+            );
+        }
+
+        // return the status
+        return $response;
+    }
+);
+
+$app->put(
+    "/alarms/{userID}",
+    function () use ($app) {
+        // Get the body
+        $alarm = $app->request->getJsonRawBody();
+
+        // Write the query
+        $phql = "UPDATE alarms set userID = :userID:, alarmID = :alarmID:, time = :time:";
+
+        $status = $app->modelsManager->executeQuery(
+            $phql,
+            [
+                "userID"    => $alarm->userID,
+                "type"      => $alarm->alarmID,
+                "year"      => $alarm->time,
+            ]
+        );
+
+        $response = new Response();
+
+        // Make sure everything worked
+        if ($status->success() === true) {
+            $response->setStatusCode(201, "Created");
+
+            $alarm->id = $status->getModel()->id;
+
+            $response->setJsonContent(
+                [
+                    "status" => "OK",
+                    "data"   => $alarm,
+                ]
+            );
+        } else {
+            // Change the HTTP status
+            $response->setStatusCode(409, "Conflict");
+
+            // Send errors to the client
+            $errors = [];
+
+            foreach ($status->getMessages() as $message) {
+                $errors[] = $message->getMessage();
+            }
+
+            $response->setJsonContent(
+                [
+                    "status"   => "ERROR",
+                    "messages" => $errors,
+                ]
+            );
+        }
+
+        // return the status
+        return $response;
+    }
+);
+
+$app->delete(
+    "/alarms/{userID}/{alarmID}",
+    function ($id) use ($app) {
+        $phql = "DELETE FROM alarms WHERE userID like :userID: and alarmID like :alarmID:";
+
+        $status = $app->modelsManager->executeQuery(
+            $phql,
+            [
+                "id" => $id,
+            ]
+        );
+
+        // Create a response
+        $response = new Response();
+
+        if ($status->success() === true) {
+            $response->setJsonContent(
+                [
+                    "status" => "OK"
+                ]
+            );
+        } else {
+            // Change the HTTP status
+            $response->setStatusCode(409, "Conflict");
+
+            $errors = [];
+
+            foreach ($status->getMessages() as $message) {
+                $errors[] = $message->getMessage();
+            }
+
+            $response->setJsonContent(
+                [
+                    "status"   => "ERROR",
+                    "messages" => $errors,
+                ]
+            );
+        }
+
+        return $response;
+    }
+);
+
+                            </code>
+                               </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="height: 150px ">
+
+        </div>
+    </div> <!-- /container -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/js.cookie.js"></script>
+        <script src="js/clock.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/prism.js"></script>
+    </body>
+</html>
