@@ -634,8 +634,8 @@ $app->post(
             $phql,
             [
                 "userID"    => $alarm->userID,
-                "type"      => $alarm->alarmID,
-                "year"      => $alarm->time,
+                "alarmID"      => $alarm->alarmID,
+                "time"      => $alarm->time,
             ]
         );
 
@@ -690,8 +690,8 @@ $app->put(
             $phql,
             [
                 "userID"    => $alarm->userID,
-                "type"      => $alarm->alarmID,
-                "year"      => $alarm->time,
+                "alarmID"      => $alarm->alarmID,
+                "time"      => $alarm->time,
             ]
         );
 
